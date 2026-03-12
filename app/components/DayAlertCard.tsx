@@ -12,11 +12,11 @@ export default function DayAlertCard({ daySummary }: { daySummary: DaySummary })
   const colorClass = LEVEL_COLOR[daySummary.level] ?? "text-moderate";
   return (
     <div className="w-full max-w-6xl mx-auto px-4">
-      <div className="rounded-2xl border border-border bg-card p-6 shadow-conclusion md:p-8 flex flex-col md:flex-row md:items-center justify-center gap-6 text-center">
-        <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
+      <div className="rounded-2xl border border-border bg-card p-4 sm:p-6 shadow-conclusion md:p-8 flex flex-col md:flex-row md:items-center justify-center gap-4 sm:gap-6 text-center">
+        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center">
           <ConclusionIcon level={daySummary.level as "laag" | "matig" | "hoog" | "zeer hoog"} className="w-10 h-10 md:w-12 md:h-12 shrink-0" />
-          <div>
-            <p className="text-xl font-bold leading-snug text-primary md:text-2xl">
+          <div className="min-w-0">
+            <p className="text-lg sm:text-xl font-bold leading-snug text-primary md:text-2xl">
               Vandaag is de kans op hooikoortsklachten{" "}
               <span className={colorClass}>{daySummary.label}</span>.
             </p>

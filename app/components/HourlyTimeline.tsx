@@ -59,11 +59,11 @@ export default function HourlyTimeline({ hourly }: { hourly: HourlyItem[] }) {
   }, [hourly]);
 
   return (
-    <div className="rounded-xl border border-border bg-card p-5 shadow-card">
-      <h3 className="text-lg font-semibold text-primary mb-4">Pollenverwachting per uur</h3>
-      <div className="flex flex-wrap justify-center gap-4">
+    <div className="rounded-xl border border-border bg-card p-4 sm:p-5 shadow-card overflow-x-auto">
+      <h3 className="text-base sm:text-lg font-semibold text-primary mb-3 sm:mb-4">Pollenverwachting per uur</h3>
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-4 min-w-0">
         {display.map((h) => (
-          <div key={h.time} className="flex flex-col items-center shrink-0 min-w-[4rem]">
+          <div key={h.time} className="flex flex-col items-center shrink-0 min-w-[3.5rem] sm:min-w-[4rem]">
             <span className="text-sm text-secondary">{formatTime(h.time)}</span>
             <span className={`mt-1 h-2 w-2 rounded-full ${LEVEL_DOT[h.level] ?? "bg-inactive"}`} />
             <span className={`mt-0.5 text-xs font-medium ${LEVEL_LABEL_COLOR[h.level] ?? "text-inactive"}`}>

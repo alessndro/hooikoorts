@@ -40,9 +40,9 @@ const BG_GRAY = "#e5e5e5";
 export default function PollenGauges({ categories }: { categories: Categories }) {
   return (
     <div>
-      <h3 className="text-lg font-semibold text-primary mb-1">Bomen, grassen en onkruiden</h3>
-      <p className="text-sm text-secondary mb-6">De pollenbelasting per categorie vandaag.</p>
-      <div className="flex flex-wrap justify-center gap-8">
+      <h3 className="text-base sm:text-lg font-semibold text-primary mb-1">Bomen, grassen en onkruiden</h3>
+      <p className="text-sm text-secondary mb-4 sm:mb-6">De pollenbelasting per categorie vandaag.</p>
+      <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
       {CATEGORY_CONFIG.map(({ key, label, icon }) => {
         const level = categories[key];
         const deg = LEVEL_FILL_DEG[level] ?? 240;
@@ -52,10 +52,10 @@ export default function PollenGauges({ categories }: { categories: Categories })
         return (
           <div key={key} className="flex flex-col items-center">
             <div
-              className="relative w-28 h-28 rounded-full"
+              className="relative w-20 h-20 sm:w-28 sm:h-28 rounded-full"
               style={{ background: conicGradient }}
             >
-              <span className="absolute inset-[10px] flex items-center justify-center rounded-full bg-card text-2xl">
+              <span className="absolute inset-[8px] sm:inset-[10px] flex items-center justify-center rounded-full bg-card text-xl sm:text-2xl">
                 {icon}
               </span>
             </div>

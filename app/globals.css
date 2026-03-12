@@ -54,6 +54,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   background: var(--page);
   color: var(--primary);

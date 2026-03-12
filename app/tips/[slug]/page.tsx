@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import Header from "../../components/Header";
+import { Glow } from "../../components/ui/glow";
 import { TIPS, getTipBySlug } from "@/lib/tips";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
@@ -111,9 +112,13 @@ export default async function TipPage({ params }: Props) {
           { name: tip.title, url },
         ]}
       />
-      <div className="min-h-screen flex flex-col bg-page">
-        <Header />
-        <main className="flex-1 w-full max-w-3xl mx-auto px-4 py-10">
+      <div className="flex flex-col bg-page overflow-x-hidden">
+        <div className="relative">
+          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden>
+            <Glow variant="center" className="animate-glow-in h-full w-full" />
+          </div>
+          <Header />
+          <main className="relative z-10 w-full max-w-3xl mx-auto px-4 py-6 sm:py-10 min-w-0">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex flex-wrap items-center gap-2 text-sm text-secondary">
               <li>
@@ -136,7 +141,7 @@ export default async function TipPage({ params }: Props) {
 
           <article className="mb-12">
             <header className="mb-8">
-              <h1 className="text-3xl font-bold text-primary md:text-4xl leading-tight mb-3">
+              <h1 className="text-2xl sm:text-3xl font-bold text-primary md:text-4xl leading-tight mb-3">
                 {tip.title}
               </h1>
               <p className="text-lg text-secondary mb-4">{tip.shortDescription}</p>
@@ -211,6 +216,7 @@ export default async function TipPage({ params }: Props) {
             </Link>
           </p>
         </main>
+        </div>
       </div>
     </>
   );

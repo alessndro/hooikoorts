@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import Header from "../components/Header";
+import { Glow } from "../components/ui/glow";
 import { TIPS } from "@/lib/tips";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
@@ -55,11 +56,15 @@ export default function TipsPage() {
   return (
     <>
       <ItemListJsonLd />
-      <div className="min-h-screen flex flex-col bg-page">
-        <Header />
-        <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-12 md:py-16">
-          <header className="text-center mb-14 md:mb-16">
-            <h1 className="text-3xl font-bold text-primary md:text-4xl lg:text-5xl tracking-tight mb-4">
+      <div className="flex flex-col bg-page overflow-x-hidden">
+        <div className="relative">
+          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden>
+            <Glow variant="center" className="animate-glow-in h-full w-full" />
+          </div>
+          <Header />
+          <main className="relative z-10 w-full max-w-4xl mx-auto px-4 py-8 sm:py-12 md:py-16">
+          <header className="text-center mb-10 sm:mb-14 md:mb-16">
+            <h1 className="text-2xl sm:text-3xl font-bold text-primary md:text-4xl lg:text-5xl tracking-tight mb-4">
               Tips & advies
             </h1>
             <p className="text-lg text-secondary max-w-xl mx-auto">
@@ -70,7 +75,7 @@ export default function TipsPage() {
 
           <section
             aria-label="Overzicht van tips"
-            className="grid gap-8 md:gap-10"
+            className="grid gap-6 sm:gap-8 md:gap-10"
           >
             {TIPS.map((tip, index) => (
               <article
@@ -127,6 +132,7 @@ export default function TipsPage() {
             </Link>
           </p>
         </main>
+        </div>
       </div>
     </>
   );

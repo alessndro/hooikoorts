@@ -38,10 +38,10 @@ export default function Home() {
   }, [region.id, date.toISOString().slice(0, 10)]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-page">
-      <div className="relative flex-1 min-h-screen">
+    <div className="min-h-screen flex flex-col bg-page overflow-x-hidden">
+      <div className="relative flex-1">
         <Header />
-        <main className="relative z-10 w-full max-w-6xl mx-auto px-4 py-8 space-y-6">
+        <main className="relative z-10 w-full max-w-6xl mx-auto px-4 py-6 sm:py-8 pb-8 space-y-5 sm:space-y-6">
         <Hero />
         <LocationDateBar
           region={region}
@@ -86,6 +86,13 @@ export default function Home() {
           </>
         )}
 
+        <section className="pt-8 max-w-2xl mx-auto text-sm text-secondary md:text-base text-center" aria-label="Over de pollenverwachting">
+          <p>
+            Op Hooikoortsvandaag.nl zie je de <strong className="text-primary">pollenverwachting vandaag</strong> voor heel Nederland.
+            Zijn er pollen vandaag? De actuele <strong className="text-primary">hooikoorts radar</strong> en pollenmeting tonen per regio en per uur hoe hoog de pollenbelasting is,
+            zodat je je dag kunt plannen en klachten kunt beperken.
+          </p>
+        </section>
         <footer className="pt-8 pb-4 text-center text-sm text-secondary">
           Weer- en luchtkwaliteitsdata door{" "}
           <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">

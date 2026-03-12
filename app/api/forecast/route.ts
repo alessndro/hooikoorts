@@ -76,13 +76,18 @@ export async function GET(request: NextRequest) {
       allAqi = Array(allTimes.length).fill(null);
     }
 
-    // Filter op de gevraagde datum (uur in lokale tijd)
+    // Gevraagde dag + volgende dag, zodat "aankomende 12 uur" ook over middernacht kan (bijv. 21:00 → 21,22,23,00,01,…,08)
+    const nextDate = new Date(date.getTime());
+    nextDate.setDate(nextDate.getDate() + 1);
+    const nextDateStr = nextDate.toISOString().slice(0, 10);
+
     let indices: number[] = [];
     for (let i = 0; i < allTimes.length; i++) {
-      if (String(allTimes[i]).startsWith(dateStr)) indices.push(i);
+      const t = String(allTimes[i]);
+      if (t.startsWith(dateStr) || t.startsWith(nextDateStr)) indices.push(i);
     }
     if (indices.length === 0) {
-      indices = Array.from({ length: Math.min(24, allTimes.length) }, (_, i) => i);
+      indices = Array.from({ length: Math.min(48, allTimes.length) }, (_, i) => i);
     }
 
     const times = indices.map((i) => allTimes[i]);
@@ -110,14 +115,16 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    const dayLevel = dayLevelFromHourlyScores(scores);
-    const loadPct = dayLoadPercentage(scores);
-    const description = dayDescription(dayLevel, hasPrecipitation, maxHourIndex);
+    // Dagconclusie alleen op basis van de gevraagde dag (eerste 24 uur)
+    const dayScores = scores.slice(0, 24);
+    const dayLevel = dayLevelFromHourlyScores(dayScores);
+    const loadPct = dayLoadPercentage(dayScores);
+    const description = dayDescription(dayLevel, hasPrecipitation, maxHourIndex !== null && maxHourIndex < 24 ? maxHourIndex : null);
 
-    const hourly: HourlyItem[] = times.slice(0, 24).map((t: string, i: number) => ({
+    const hourly: HourlyItem[] = times.map((t: string, i: number) => ({
       time: t,
       level:
-      scores[i] <= 25 ? "laag" : scores[i] <= 50 ? "matig" : scores[i] <= 75 ? "hoog" : "zeer hoog",
+        scores[i] <= 25 ? "laag" : scores[i] <= 50 ? "matig" : scores[i] <= 75 ? "hoog" : "zeer hoog",
     }));
 
     const activePollen: ActivePollenItem[] = [

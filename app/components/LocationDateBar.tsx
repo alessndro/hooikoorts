@@ -18,18 +18,22 @@ interface LocationDateBarProps {
   onDateChange: (date: Date) => void;
 }
 
-export default function LocationDateBar({ region, date, onRegionChange, onDateChange }: LocationDateBarProps) {
+export default function LocationDateBar({ region, date, onRegionChange }: LocationDateBarProps) {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3 w-full max-w-6xl mx-auto px-4">
-      <div className="flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-3 text-primary shadow-card text-sm font-medium min-w-[200px]">
-        <LocationIcon className="w-5 h-5 text-secondary" />
+    <div className="flex flex-col items-center gap-4 w-full max-w-6xl mx-auto px-4 -mt-1">
+      <p className="flex items-center gap-2 text-base font-medium text-primary" aria-live="polite">
+        <DateIcon className="w-5 h-5 shrink-0 text-secondary" />
+        <span>{formatDate(date)}</span>
+      </p>
+      <div className="flex items-center gap-2 rounded-xl border border-border bg-card px-3 py-2.5 sm:px-4 sm:py-3 text-primary shadow-card text-sm font-medium w-full min-w-0 sm:min-w-[200px] sm:w-auto max-w-[280px] sm:max-w-none">
+        <LocationIcon className="w-5 h-5 text-secondary shrink-0" />
         <select
           value={region.id}
           onChange={(e) => {
             const r = REGIONS.find((x) => x.id === e.target.value);
             if (r) onRegionChange(r);
           }}
-          className="bg-transparent font-medium text-primary cursor-pointer border-0 p-0 focus:ring-0 focus:outline-none min-w-0 flex-1"
+          className="bg-transparent font-medium text-primary cursor-pointer border-0 p-0 focus:ring-0 focus:outline-none min-w-0 flex-1 text-center sm:text-left"
           aria-label="Kies provincie"
         >
           {REGIONS.map((r) => (
@@ -38,10 +42,6 @@ export default function LocationDateBar({ region, date, onRegionChange, onDateCh
             </option>
           ))}
         </select>
-      </div>
-      <div className="flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-3 text-secondary text-sm shadow-card">
-        <DateIcon className="w-5 h-5 text-secondary shrink-0" />
-        <span>{formatDate(date)}</span>
       </div>
     </div>
   );
