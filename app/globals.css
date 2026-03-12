@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+  --page: #fafaf9;
+  --card: #ffffff;
+  --primary: #1c1917;
+  --secondary: #57534e;
+  --tertiary: #78716c;
+  --highlight: #c2410c;
+  --low: #16a34a;
+  --moderate: #f97316;
+  --high: #ef4444;
+  --veryHigh: #b91c1c;
+  --inactive: #9ca3af;
+  --border: #e7e5e4;
+  --cta-bg: #e7e5e4;
+  --glow-foreground: rgba(234, 88, 12, 0.2);
+  --glow-soft: rgba(251, 146, 60, 0.14);
+}
+
+.dark {
+  --page: #0c0a09;
+  --card: #1c1917;
+  --primary: #fafaf9;
+  --secondary: #a8a29e;
+  --tertiary: #78716c;
+  --highlight: #ea580c;
+  --low: #22c55e;
+  --moderate: #fb923c;
+  --high: #f87171;
+  --veryHigh: #dc2626;
+  --inactive: #57534e;
+  --border: #292524;
+  --cta-bg: #292524;
+  --glow-foreground: rgba(234, 88, 12, 0.25);
+  --glow-soft: rgba(251, 146, 60, 0.18);
+}
+
+@theme inline {
+  --color-page: var(--page);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  --color-highlight: var(--highlight);
+  --color-low: var(--low);
+  --color-moderate: var(--moderate);
+  --color-high: var(--high);
+  --color-veryHigh: var(--veryHigh);
+  --color-inactive: var(--inactive);
+  --color-border: var(--border);
+  --color-cta-bg: var(--cta-bg);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--page);
+  color: var(--primary);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Conclusie-kaart: duidelijkere schaduw zodat de boodschap visueel uitsteekt */
+.shadow-conclusion {
+  box-shadow:
+    0 1px 3px 0 rgb(0 0 0 / 0.05),
+    0 4px 6px -1px rgb(0 0 0 / 0.08),
+    0 10px 20px -5px rgb(0 0 0 / 0.08);
+}
+
+/* Glow-animatie (optioneel) */
+@keyframes appear-zoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-glow-in {
+  animation: appear-zoom 0.8s ease-out forwards;
+}
